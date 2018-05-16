@@ -133,7 +133,7 @@ cov_init(void)
 {
 #ifdef HAVE_LIBBFD
     bfd_init();
-    bfd_set_error_handler(cov_bfd_error_handler);
+    bfd_set_error_handler((bfd_error_handler_type) cov_bfd_error_handler);
 #endif /* HAVE_LIBBFD */
 
     new cov_callgraph_t();      // becomes singleton instance
