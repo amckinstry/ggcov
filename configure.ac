@@ -52,6 +52,7 @@ else
 fi
 AC_SUBST(GUIPROG)
 
+
 dnl Try to find the Berkeley DB in any of the odd places it might be hiding
 DB_LIB_db42="db-4.2"
 DB_CPPFLAGS_db42="-I/usr/include/db42"
@@ -445,6 +446,34 @@ linux*)
     AC_MSG_RESULT([])
     ;;
 esac
+
+# default for calltree
+use_calltree=no
+case "$host_cpu" in
+i?86|i86pc) use_calltree=yes ;;
+x86_64) use_calltree=yes ;;
+esac
+
+dnl Disable calltree functionality (Needed on non-X86 systems for the moment)
+AC_MSG_CHECKING(whether to include calltree functionality)
+AC_ARG_ENABLE(calltree,
+[  --disable-calltree    Do not include calltree], [
+case "${enableval}" in
+yes|no)
+    calltree=${enableval}
+    ;;
+*)
+    AC_MSG_ERROR(bad value ${enableval} for --enable-calltree)
+    ;;
+esac
+],[calltree=$use_calltree])
+AC_MSG_RESULT($calltree)
+AM_CONDITIONAL(CALLTREE, test x$calltree = xyes)
+if  test x$calltree = xno ; then
+    RPM_SPEC_CONFIGURE_ARGS="$RPM_SPEC_CONFIGURE_ARGS --disable-calltree"
+    mv test/test033 test/test033.disable
+fi
+AC_SUBST(CALLTREE)
 
 if test x$is_linux = xyes ; then
     AC_MSG_CHECKING(for Linux distro-specific defines)

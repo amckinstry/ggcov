@@ -68,9 +68,13 @@ libcov_a_SOURCES= \
 # This is a sad hack to work around the problem where some
 # objects need to be unconditionally linked instead of pulled
 # in from libcov.a on demand.
-LIBCOV_STATIC_SOURCES= \
-		cov_stab32.C cov_i386.C cov_dwarf2.C cov_elf.C
-		
+#
+if CALLTREE
+LIBCOV_STATIC_SOURCES=  cov_stab32.C cov_i386.C cov_arm.C cov_dwarf2.C cov_elf.C
+else
+LIBCOV_STATIC_SOURCES=  cov_stab32.C cov_dwarf2.C cov_elf.C
+endif
+
 if GUI
 BASEINCLUDES=	$(GGCOV_GUI_CFLAGS)
 else
