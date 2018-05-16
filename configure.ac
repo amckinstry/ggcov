@@ -308,7 +308,7 @@ AC_TYPE_PID_T
 
 dnl A bunch of warning options for gcc
 AC_GCC_ADD_CFLAGS([-Wall -Wchar-subscripts 
-    	    	   -Wpointer-arith -Wsign-compare
+    	    	   -Wsign-compare
 		   -pedantic -Wno-long-long -Wno-variadic-macros])
 
 AC_GCC_ADD_CFLAGS([-fno-rtti -fno-exceptions -fno-implement-inlines])
