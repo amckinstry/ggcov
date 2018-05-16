@@ -104,9 +104,9 @@ AM_CPPFLAGS=	$(BASEINCLUDES) -DPKGDATADIR="\"$(pkgdatadir)\"" \
 		-DPREFIX="\"$(prefix)\"" -DDATADIR="\"$(datadir)\"" \
 		-DLIBDIR="\"$(libdir)\"" -DSYSCONFDIR="\"$(sysconfdir)\"" \
 		-DUI_DEBUG=$(UI_DEBUG)
-ggcov_LDADD=	libcov.a libcommon.a $(GGCOV_GUI_LIBS) $(BFD_LIBS) -lX11
+ggcov_LDADD=	libcov.a libcommon.a $(GGCOV_GUI_LIBS) $(BFD_LIBS) -ldl -lz -lX11
 ggcov_LDFLAGS=  -Wl,--as-needed
-CLI_LIBS=	libcov.a libcommon.a $(GGCOV_CLI_LIBS) $(BFD_LIBS)
+CLI_LIBS=	libcov.a libcommon.a $(GGCOV_CLI_LIBS) $(BFD_LIBS) -ldl -lz
 
 
 tggcov_SOURCES= tggcov.c \
