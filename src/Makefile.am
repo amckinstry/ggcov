@@ -105,7 +105,9 @@ AM_CPPFLAGS=	$(BASEINCLUDES) -DPKGDATADIR="\"$(pkgdatadir)\"" \
 		-DLIBDIR="\"$(libdir)\"" -DSYSCONFDIR="\"$(sysconfdir)\"" \
 		-DUI_DEBUG=$(UI_DEBUG)
 ggcov_LDADD=	libcov.a libcommon.a $(GGCOV_GUI_LIBS) $(BFD_LIBS)
+ggcov_LDFLAGS=  -Wl,--as-needed
 CLI_LIBS=	libcov.a libcommon.a $(GGCOV_CLI_LIBS) $(BFD_LIBS)
+
 
 tggcov_SOURCES= tggcov.c \
 		check_scenegen.H check_scenegen.C \
